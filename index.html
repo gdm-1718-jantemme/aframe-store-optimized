@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>The Showroom</title>
+  <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script>
+      
+  <!-- Orbit Controls -->
+  <script src="https://unpkg.com/aframe-orbit-controls@1.0.0/dist/aframe-orbit-controls.min.js"></script>
 
-  <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
-  <script src="https://unpkg.com/aframe-video-illumination-component/dist/aframe-video-illumination-component.min.js">
-  </script>
-
-  </script>
+  <!-- Logging in VR -->
+  <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script>
 </head>
 
 <body>
@@ -494,6 +494,110 @@
       }
     });
   </script>
+  
+    <script>
+      var player = document.querySelector("a-camera");
+      AFRAME.registerComponent('control_movement', {
+
+        init: function () {
+          document.querySelector('a-scene').addEventListener('enter-vr', function () {
+            document.querySelector('a-camera').object3D.position.set(0,0,0);
+          });
+          
+          // Reload work around, Oculus Go controller stops responding after re-entering VR
+          // https://github.com/aframevr/aframe/issues/3390
+          document.querySelector('a-scene').addEventListener('exit-vr', function () {
+            window.location.reload(true);
+          });
+          
+          this.TRIGGER_EVENT = 'triggerdown'
+          this.UNTRIGGER_EVENT = 'triggerup'
+          
+          this.TRACKPAD_EVENT = 'trackpaddown'
+          this.UNTRACKPAD_EVENT = 'trackpadup'
+          
+          this.triggered = false
+          this.trackpad = false
+          
+          this.currentPlanePos = document.querySelector('#plane').getAttribute('position')
+          this.triggerStartPos = null
+          this.trackpadStartPos = null
+          
+          this.el.addEventListener(this.TRIGGER_EVENT, e => this.startTrigger(e))
+          this.el.addEventListener(this.UNTRIGGER_EVENT, e => this.endTrigger(e))
+          
+          this.el.addEventListener(this.TRACKPAD_EVENT, e => this.startTrackpad(e))
+          this.el.addEventListener(this.UNTRACKPAD_EVENT, e => this.endTrackpad(e))
+          
+        },
+        
+        startTrigger: function (evt) {
+          var angle = player.getAttribute("rotation");
+          var x = 1 * Math.cos((angle.y * Math.PI) / 180);
+          var y = 1 * Math.sin((angle.y * Math.PI) / 180);
+          var pos = player.getAttribute("position");
+          pos.x -= y;
+          pos.z -= x;
+          player.setAttribute("position", pos);
+          this.triggered = true;
+          this.triggerStartPos = this.el.getAttribute('position')
+          this.triggerStartPos_x = this.triggerStartPos.x
+          this.triggerStartPos_y = this.triggerStartPos.y
+          AFRAME.log('Start Trigger Called at position: ' + this.triggerStartPos_y);
+                                                      
+        },
+        
+        endTrigger: function (evt) {
+          AFRAME.log('End Trigger Called...');
+          this.triggered = false;
+        },
+        
+        startTrackpad: function (evt) {
+          this.trackpad = true;
+          this.trackpadStartPos = this.el.getAttribute('position')
+          this.trackpadStartPos_z = this.trackpadStartPos.z
+          AFRAME.log('Start Trigger Called at position: ' + this.trackpadStartPos_z);
+                                                      
+        },
+        
+        endTrackpad: function (evt) {
+          AFRAME.log('End Trackpad Called...');
+          this.trackpad = false;
+        },
+        
+        tick: function () {
+          
+          if (this.triggered || this.trackpad){
+            var plane = document.querySelector('#plane');
+            var currentPosPlane = plane.getAttribute('position');
+            var controller = document.querySelector('#controller');
+            var currentPosController = controller.getAttribute('position');
+          }
+          
+          if (this.triggered){
+            AFRAME.log('Holding trigger...');
+            var triggerPosDiff_x = (currentPosController.x - this.triggerStartPos_x)*1
+            var triggerPosDiff_y = (currentPosController.y - this.triggerStartPos_y)*1
+            
+            plane.object3D.position.x += triggerPosDiff_x
+            plane.object3D.position.y += triggerPosDiff_y
+            this.triggerStartPos_x = currentPosController.x
+            this.triggerStartPos_y = currentPosController.y
+          }
+          
+          if (this.trackpad){
+            AFRAME.log('Holding trackpad...');
+            var trackpadPosDiff_z = (currentPosController.z - this.trackpadStartPos_z)*1
+            plane.object3D.position.z += trackpadPosDiff_z
+            this.trackpadStartPos_z = currentPosController.z
+            
+          }
+          
+        }
+      });
+
+    
+    </script>
 </body>
 
 </html>
