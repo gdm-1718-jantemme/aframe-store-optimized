@@ -33,7 +33,7 @@ for (let i = 0; i < totalLamps; i++) {
     const el = document.createElement('a-entity');
     // Set attributes for element
     el.setAttribute('gltf-model', '#lamp1');
-    el.setAttribute('light', "type: directional; color: #EEE; intensity: 0.2");
+    //el.setAttribute('light', "type: directional; color: #EEE; intensity: 0.2");
     el.object3D.position.set(
         x,
         y,
