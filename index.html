@@ -109,10 +109,12 @@
       <a-asset-item id="table_fanta" src="./models/aframe/fanta.gltf"></a-asset-item>
     </a-assets>
 
+      <a-entity control_movement id="controller" oculus-go-controls daydream-controls></a-entity>
 
+    <a-camera wasd-controls-enabled="false" id="camera" orbit-controls="target: 0 -0.3 -1.5; minDistance: 0.0; maxDistance: 180; initialPosition: 0 0 0; enableKeys: false; rotateSpeed: 0.2; panSpeed: 1; zoomSpeed: 1;"></a-camera>
+    
 
-
-    <a-camera position="0 3 0" look-controls wasd-controls="acceleration: 300"></a-camera>
+    <!--<a-camera position="0 3 0" look-controls wasd-controls="acceleration: 300"></a-camera>-->
     <!--<a-sky src="derelict_overpass_1k.jpg" rotation="0 -130 0"></a-sky>-->
     <a-asset-item id="mcwc" src="./models/aframe/wcmancave.gltf" response-type="arraybuffer" position="0 0 0">
     </a-asset-item>
