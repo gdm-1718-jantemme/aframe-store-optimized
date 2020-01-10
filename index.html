@@ -42,7 +42,7 @@
       <a-asset-item id="christmasTree" src="./models/aframe/christmasTree.gltf" response-type="arraybuffer"
         position="0 0 0">
       </a-asset-item>
-      <!--<video src="./mr_video.mp4" id="mr_video" loop="false" autoplay="false"></video>-->
+        <video src="./mr_video.mp4" id="mr_video" loop="false" autoplay="false"></video>
       <a-asset-item id="displayTV" src="./models/aframe/displayTV.gltf" response-type="arraybuffer" position="0 0 0">
       </a-asset-item>
       
@@ -108,14 +108,8 @@
       <a-asset-item id="table_cola" src="./models/aframe/cola.gltf"></a-asset-item>
       <a-asset-item id="table_fanta" src="./models/aframe/fanta.gltf"></a-asset-item>
     </a-assets>
-
-      <a-entity control_movement id="controller" oculus-go-controls daydream-controls></a-entity>
-
-    <a-camera wasd-controls-enabled="false" id="camera" orbit-controls="target: 0 -0.3 -1.5; minDistance: 0.0; maxDistance: 180; initialPosition: 0 0 0; enableKeys: false; rotateSpeed: 0.2; panSpeed: 1; zoomSpeed: 1;"></a-camera>
-    
-
-    <!--<a-camera position="0 3 0" look-controls wasd-controls="acceleration: 300"></a-camera>-->
-    <!--<a-sky src="derelict_overpass_1k.jpg" rotation="0 -130 0"></a-sky>-->
+    <a-camera position="0 3 0" look-controls wasd-controls="acceleration: 300"></a-camera>
+    <a-sky src="derelict_overpass_1k.jpg" rotation="0 -130 0"></a-sky>
     <a-asset-item id="mcwc" src="./models/aframe/wcmancave.gltf" response-type="arraybuffer" position="0 0 0">
     </a-asset-item>
     </a-assets>
@@ -336,8 +330,8 @@
     <!-- displayTV -->
     <a-entity id="displayTV" gltf-model="#displayTV" position="0 0 -1.5" rotation="0 -90 0" shadow="cast: false;">
 
-      <!--<a-video width="16" height="9" rotation="0 90 0" position="-4.451 3.82 0" src="#mr_video" scale="0.20 0.22 0">
-      </a-video>-->
+      <a-video width="16" height="9" rotation="0 90 0" position="-4.451 3.82 0" src="#mr_video" scale="0.20 0.22 0">
+      </a-video>
     </a-entity>
     <!-- end displayTV -->
 
@@ -475,7 +469,7 @@
       mesh.material.needsUpdate = false;
       this.switch = !this.switch;
     });
-    entityEl.addEventListener("triggerdown", function (event) {
+    window.addEventListener("triggerdown", function (event) {
       var angle = player.getAttribute("rotation");
       var x = 1 * Math.cos((angle.y * Math.PI) / 180);
       var y = 1 * Math.sin((angle.y * Math.PI) / 180);
@@ -496,110 +490,6 @@
       }
     });
   </script>
-  
-    <script>
-      var player = document.querySelector("a-camera");
-      AFRAME.registerComponent('control_movement', {
-
-        init: function () {
-          document.querySelector('a-scene').addEventListener('enter-vr', function () {
-            document.querySelector('a-camera').object3D.position.set(0,0,0);
-          });
-          
-          // Reload work around, Oculus Go controller stops responding after re-entering VR
-          // https://github.com/aframevr/aframe/issues/3390
-          document.querySelector('a-scene').addEventListener('exit-vr', function () {
-            window.location.reload(true);
-          });
-          
-          this.TRIGGER_EVENT = 'triggerdown'
-          this.UNTRIGGER_EVENT = 'triggerup'
-          
-          this.TRACKPAD_EVENT = 'trackpaddown'
-          this.UNTRACKPAD_EVENT = 'trackpadup'
-          
-          this.triggered = false
-          this.trackpad = false
-          
-          this.currentPlanePos = document.querySelector('#plane').getAttribute('position')
-          this.triggerStartPos = null
-          this.trackpadStartPos = null
-          
-          this.el.addEventListener(this.TRIGGER_EVENT, e => this.startTrigger(e))
-          this.el.addEventListener(this.UNTRIGGER_EVENT, e => this.endTrigger(e))
-          
-          this.el.addEventListener(this.TRACKPAD_EVENT, e => this.startTrackpad(e))
-          this.el.addEventListener(this.UNTRACKPAD_EVENT, e => this.endTrackpad(e))
-          
-        },
-        
-        startTrigger: function (evt) {
-          var angle = player.getAttribute("rotation");
-          var x = 1 * Math.cos((angle.y * Math.PI) / 180);
-          var y = 1 * Math.sin((angle.y * Math.PI) / 180);
-          var pos = player.getAttribute("position");
-          pos.x -= y;
-          pos.z -= x;
-          player.setAttribute("position", pos);
-          this.triggered = true;
-          this.triggerStartPos = this.el.getAttribute('position')
-          this.triggerStartPos_x = this.triggerStartPos.x
-          this.triggerStartPos_y = this.triggerStartPos.y
-          AFRAME.log('Start Trigger Called at position: ' + this.triggerStartPos_y);
-                                                      
-        },
-        
-        endTrigger: function (evt) {
-          AFRAME.log('End Trigger Called...');
-          this.triggered = false;
-        },
-        
-        startTrackpad: function (evt) {
-          this.trackpad = true;
-          this.trackpadStartPos = this.el.getAttribute('position')
-          this.trackpadStartPos_z = this.trackpadStartPos.z
-          AFRAME.log('Start Trigger Called at position: ' + this.trackpadStartPos_z);
-                                                      
-        },
-        
-        endTrackpad: function (evt) {
-          AFRAME.log('End Trackpad Called...');
-          this.trackpad = false;
-        },
-        
-        tick: function () {
-          
-          if (this.triggered || this.trackpad){
-            var plane = document.querySelector('#plane');
-            var currentPosPlane = plane.getAttribute('position');
-            var controller = document.querySelector('#controller');
-            var currentPosController = controller.getAttribute('position');
-          }
-          
-          if (this.triggered){
-            AFRAME.log('Holding trigger...');
-            var triggerPosDiff_x = (currentPosController.x - this.triggerStartPos_x)*1
-            var triggerPosDiff_y = (currentPosController.y - this.triggerStartPos_y)*1
-            
-            plane.object3D.position.x += triggerPosDiff_x
-            plane.object3D.position.y += triggerPosDiff_y
-            this.triggerStartPos_x = currentPosController.x
-            this.triggerStartPos_y = currentPosController.y
-          }
-          
-          if (this.trackpad){
-            AFRAME.log('Holding trackpad...');
-            var trackpadPosDiff_z = (currentPosController.z - this.trackpadStartPos_z)*1
-            plane.object3D.position.z += trackpadPosDiff_z
-            this.trackpadStartPos_z = currentPosController.z
-            
-          }
-          
-        }
-      });
-
-    
-    </script>
 </body>
 
 </html>
