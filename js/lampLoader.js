@@ -40,7 +40,7 @@ for (let i = 0; i < totalLamps; i++) {
         z
     );
     el.object3D.scale.set(2, 2, 2);
-    el.setAttribute('shadow', "cast: true, receive: true");
+    el.setAttribute('shadow', "cast: false, receive: false");
     lampGroup.appendChild(el);
 }
 scene.appendChild(lampGroup);

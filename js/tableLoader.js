@@ -50,7 +50,7 @@ const placeCircle = (amount, object, options) => {
       radius * Math.cos(rotation * Math.PI / 180)
     );
     el.object3D.scale.set(scale, scale, scale);
-    if(shadows) el.setAttribute('shadow', "cast: true, receive: true");
+    if(shadows) el.setAttribute('shadow', "cast: false, receive: false");
     if(object === "base_table") {
       const amountOnTable = Math.floor(Math.random() * (5 - 1) + 1);
       fillTable(tableAssets, amountOnTable, el);
@@ -75,7 +75,7 @@ placeCircle(9, 'base_table', {
   rotationModifier: [90, 90, 90, 90, 0, 90, 90, 90, 90],
   radius: 70,
   curve: 50,
-  shadows: true,
+  shadows: false,
   scale: 1.2,
 });
 
@@ -85,6 +85,6 @@ placeCircle(9, 'base_table', {
   rotationModifier: [90, 90, 90, 90, 0, 90, 90, 90, 90],
   radius: 70,
   curve: 50,
-  shadows: true,
+  shadows: false,
   scale: 1.2,
 });
