@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>The Showroom</title>
+
+  <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/aframe-video-illumination-component/dist/aframe-video-illumination-component.min.js">
+  </script>
+
+  </script>
+</head>
+
+<body>
+  <a-scene background="color: #ECECEC" shadow="type: pcfsoft">
+    <a-assets>
+      <a-asset-item id="building" src="./models/aframe/storeBuilding_v6.gltf" response-type="arraybuffer">
+      </a-asset-item>
+      <a-asset-item id="kassa" src="./models/aframe/kassa.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="trashcan" src="./models/aframe/trashcan.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <!--<a-asset-item id="chips" src="./models/aframe/chips.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>-->
+      <a-asset-item id="base_table" src="./models/aframe/table_long.gltf" response-type="arraybuffer"></a-asset-item>
+      <!--<a-asset-item id="bird" animation-mixer src="./models/aframe/bird.gltf" response-type="arraybuffer"
+        position="0 0 0">
+      </a-asset-item>-->
+      <a-asset-item id="speaker" animation-mixer src="./models/aframe/speaker.gltf" response-type="arraybuffer"
+        position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="lamp1" src="./models/aframe/lamp1.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="lamp4" src="./models/aframe/lamp4.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="mug" src="./models/aframe/koffiemok.gltf" response-type="arraybuffer"></a-asset-item>
+
+      <a-asset-item id="christmasTree" src="./models/aframe/christmasTree.gltf" response-type="arraybuffer"
+        position="0 0 0">
+      </a-asset-item>
+      <video src="./mr_video.mp4" id="mr_video" loop="true" autoplay="true"></video>
+      <a-asset-item id="displayTV" src="./models/aframe/displayTV.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      
+      <!-- Mancave items-->
+      <a-asset-item id="pokertafel" src="./models/aframe/Pokertafel.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="darts" src="./models/aframe/darts.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="mancavefrigo" src="./models/aframe/frigo.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="pooltable" src="./models/aframe/pooltable.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="tv" src="./models/aframe/tv.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="fontein" src="./models/aframe/fontein.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="toog" src="./models/aframe/toog.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="toilet" src="./models/aframe/toilet.gltf" response-type="arraybuffer" position="0 0 0">
+        </a-asset-item>
+
+      <!-- Seating & Flora -->
+      <a-asset-item id="plant-leaves" src="./models/aframe/plant-leaves.gltf" response-type="arraybuffer"
+        position="0 0 0"></a-asset-item>
+      <a-asset-item id="plant-high" src="./models/aframe/plant-high.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="plant-low" src="./models/aframe/plant-low.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="bench-wood" src="./models/aframe/bench-wood.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="bench-dark" src="./models/aframe/bench-dark.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="seat-wall" src="./models/aframe/seat-wall.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="seat-wall-small" src="./models/aframe/seat-wall-small.gltf" response-type="arraybuffer"
+        position="0 0 0"></a-asset-item>
+      <a-asset-item id="seat-marble" src="./models/aframe/seat-marble.gltf" response-type="arraybuffer"
+        position="0 0 0"></a-asset-item>
+      <a-asset-item id="seat-group" src="./models/aframe/seat-group.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="couch-big" src="./models/aframe/couch-big.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="couch-small" src="./models/aframe/couch-small.gltf" response-type="arraybuffer"
+        position="0 0 0"></a-asset-item>
+
+        
+      <a-asset-item id="toilet" src="./models/aframe/toilet.gltf" response-type="arraybuffer" position="0 0 0">
+      </a-asset-item>
+      <a-asset-item id="drankautomaat" src="./models/aframe/drankautomaat.gltf" response-type="arraybuffer"
+        position="0 0 0">
+      </a-asset-item>
+      <!-- Table objects -->
+      <a-asset-item id="table_groen" src="./models/aframe/pringlesGreen.gltf"></a-asset-item>
+      <a-asset-item id="table_purple" src="./models/aframe/pringlesPurple.gltf"></a-asset-item>
+      <a-asset-item id="table_blue" src="./models/aframe/pringlesBlue.gltf"></a-asset-item>
+      <a-asset-item id="table_rood" src="./models/aframe/rood.gltf"></a-asset-item>
+      <a-asset-item id="table_dopper" src="./models/aframe/dopper.gltf"></a-asset-item>
+      <a-asset-item id="table_dopper2" src="./models/aframe/dopper.glb"></a-asset-item>
+      <a-asset-item id="table_cereal" src="./models/aframe/cereal.gltf"></a-asset-item>
+      <a-asset-item id="table_blik" src="./models/aframe/drankblik.gltf"></a-asset-item>
+      <a-asset-item id="table_yoghurt1" src="./models/aframe/danone.gltf"></a-asset-item>
+      <a-asset-item id="table_yoghurt2" src="./models/aframe/activia.gltf"></a-asset-item>
+      <a-asset-item id="table_cola" src="./models/aframe/cola.gltf"></a-asset-item>
+      <a-asset-item id="table_fanta" src="./models/aframe/fanta.gltf"></a-asset-item>
+    </a-assets>
+
+
+
+
+    <a-camera position="0 3 0" look-controls wasd-controls="acceleration: 300"></a-camera>
+    <!--<a-sky src="derelict_overpass_1k.jpg" rotation="0 -130 0"></a-sky>-->
+    <a-asset-item id="mcwc" src="./models/aframe/wcmancave.gltf" response-type="arraybuffer" position="0 0 0">
+    </a-asset-item>
+    </a-assets>
+    <a-asset-item id="salontafel" src="./models/aframe/salontafel.gltf" response-type="arraybuffer" position="0 0 0">
+    </a-asset-item>
+    </a-assets>
+    <a-asset-item id="playstation" src="./models/aframe/playstation.gltf" response-type="arraybuffer" position="0 0 0">
+    </a-asset-item>
+    </a-assets>
+    <a-asset-item id="seat-group" src="./models/aframe/seat-group.gltf" response-type="arraybuffer" position="0 0 0">
+    </a-asset-item>
+    <a-asset-item id="mancavechair" src="./models/aframe/mancavechair.gltf" response-type="arraybuffer"
+      position="0 0 0"></a-asset-item>
+    <a-asset-item id="stack_black" src="./models/aframe/pokerchips/stack_black.gltf" response-type="arraybuffer"
+      position="0 0 0"></a-asset-item>
+    <a-asset-item id="stack_red" src="./models/aframe/pokerchips/stack_red.gltf" response-type="arraybuffer"
+      position="0 0 0"></a-asset-item>
+    <a-asset-item id="aperitif-table" src="./models/aframe/aperitif-table.gltf" response-type="arraybuffer"
+      position="0 0 0"></a-asset-item>
+    <!-- End mancave items-->
+
+    </a-assets>
+
+
+
+
+    <a-entity light="type: ambient; color: #CCC; intensity: 0.8"></a-entity>
+    <a-entity
+      light="color: #EEE; intensity: 1; castShadow: true; shadowCameraVisible: false; shadowBias: -0.00021 ; shadowCameraBottom: -20; shadowCameraFar: 400; shadowCameraLeft: -100; shadowCameraRight: 200; shadowCameraNear: 0; shadowCameraTop: 200; shadowCameraFov: 90.06; shadowMapHeight: 2048; shadowMapWidth: 2048; decay: 0; shadowRadius: 0.5"
+      position="56.09537 39.42387 40.96024"></a-entity>
+    <a-entity light="type: hemisphere; color: #9ce9ff; groundColor: #3d3d3d; intensity: 0.5"></a-entity>
+    <a-entity id="kassa" gltf-model="#kassa" position="24 -0.4 0" rotation="0 35 0" animation-mixer scale="2 2 2"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="trashcan" gltf-model="#trashcan" position="20 0 2" animation-mixer scale="0.5 0.5 0.5"
+      shadow="cast: true;"></a-entity>
+    <a-entity id="chips" gltf-model="#chips" position="8 0 0" animation-mixer scale="0.5 0.5 0.5" shadow="cast: true;">
+    </a-entity>
+    <a-entity id="fontein" gltf-model="#fontein" rotation="0 0 0" position="30 0 -6" animation-mixer scale=".5 .5 .5"
+      shadow="cast: true">
+    </a-entity>
+
+    <!-- Man Cave-->
+
+    <!-- POKER -->
+    <a-entity id="pokertafel" gltf-model="#pokertafel" position="-40 1 -142" animation-mixer scale=".15 .15 .15"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="stack_black" gltf-model="#stack_black" position="-40.5 1.1 -141" animation-mixer scale=".06 .06 .06"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="stack_red" gltf-model="#stack_red" position="-39 1.1 -141.3" animation-mixer scale=".06 .06 .06"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="mancavechair" gltf-model="#mancavechair" position="-40 0 -139.5" animation-mixer scale="0.6 0.6 0.6"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="mancavechair" gltf-model="#mancavechair" position="-37.8 0 -140.8" rotation="0 70 0" animation-mixer
+      scale="0.6 0.6 0.6" shadow="cast: true">
+    </a-entity>
+    <a-entity id="mancavechair" gltf-model="#mancavechair" position="-38 0 -144" rotation="0 140 0" animation-mixer
+      scale="0.6 0.6 0.6" shadow="cast: true">
+    </a-entity>
+    <a-entity id="pokertafel" gltf-model="#pokertafel" position="-40 1 -132" animation-mixer scale=".15 .15 .15"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="mancavefrigo" gltf-model="#mancavefrigo" rotation="0 -60 0" position="-43 0 -141.5" animation-mixer
+      scale="0.5 0.5 0.5" shadow="cast: true">
+    </a-entity>
+
+    <!-- POOL -->
+    <a-entity id="pooltable" gltf-model="#pooltable" rotation="0 20 0" position="-32 1 -142" animation-mixer
+      scale="1 1 1" shadow="cast: true">
+    </a-entity>
+    <a-entity id="pooltable" gltf-model="#pooltable" rotation="0 20 0" position="-32 1 -152" animation-mixer
+      scale="1 1 1" shadow="cast: true">
+    </a-entity>
+
+    </a-entity>
+
+    <!-- GAME -->
+    <a-entity id="salontafel" gltf-model="#salontafel" rotation="0 -80 0" position="-17 1 -153.5 " scale="2 2 2"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="playstation" gltf-model="#playstation" rotation="0 98 0" position="-17.7 0.7 -153.7"
+      scale="0.3 0.3 0.3" shadow="cast: true">
+    </a-entity>
+    <a-entity id="toilet" gltf-model="#toilet" rotation="0 37 0" position="-45 -1 -145" animation-mixer scale="2 2 2"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="drankautomaat" gltf-model="#drankautomaat" rotation="0 -158.76 0" position="-23.6 0 -138" animation-mixer
+      scale="1.1 1.1 1.1" shadow="cast: true">
+    </a-entity>
+    </a-entity>
+    <a-entity id="tv" gltf-model="#tv" rotation="0 100 0" position="-18.7 1.9 -153.7" animation-mixer scale=".7 .7 .7"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="seat-group" gltf-model="#seat-group" rotation="0 0 0" position="-13.5 0 -160.5" animation-mixer
+      scale="2 2 2" shadow="cast: true">
+    </a-entity>
+    <a-entity id="seat-group" gltf-model="#seat-group" rotation="0 0 0" position="-11.5 0 -161" animation-mixer
+      scale="2 2 2" shadow="cast: true">
+    </a-entity>
+
+    <a-entity id="salontafel" gltf-model="#salontafel" rotation="0 105 0" position="-16 1 -140.5 " scale="2 2 2"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="playstation" gltf-model="#playstation" rotation="0 -75 0" position="-14.3 0.7 -140.1"
+      scale="0.3 0.3 0.3" shadow="cast: true">
+    </a-entity>
+    <a-entity id="tv" gltf-model="#tv" rotation="0 105 0" position="-14.3 1.9 -140.1" animation-mixer scale=".7 .7 .7"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="seat-group" gltf-model="#seat-group" rotation="0 0 0" position="-14 0 -167.5" animation-mixer
+      scale="2 2 2" shadow="cast: true">
+    </a-entity>
+    <a-entity id="seat-group" gltf-model="#seat-group" rotation="0 0 0" position="-12 0 -167.8" animation-mixer
+      scale="2 2 2" shadow="cast: true">
+    </a-entity>
+
+    <!-- BAR -->
+    <a-entity id="toog" gltf-model="#toog" rotation="0 0 0" position="10 0 -147.5" scale=".25 .25 .25"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="toog" gltf-model="#toog" rotation="0 0 0" position="40 0 -136" scale=".25 .25 .25"
+      shadow="cast: true">
+    </a-entity>
+    <a-entity id="plant-high" gltf-model="#plant-high" rotation="0 0 0" position="22.5 0 -134" animation-mixer
+      scale="5 5 5" shadow="cast: t
+        rue">
+    </a-entity>
+    <!-- BAR TABLES -->
+    <!-- <a-entity id="aperitif-table" gltf-model="#aperitif-table" rotation="0 0 0" position="22.5 0.8 -138" animation-mixer scale="2 2 2"
+          shadow="cast: t
+          rue">
+        </a-entity> -->
+    <a-entity id="aperitif-table" gltf-model="#aperitif-table" rotation="0 0 0" position="18 0.8 -142" animation-mixer
+      scale="2 2 2" shadow="cast: t
+          rue">
+    </a-entity>
+    <a-entity id="aperitif-table" gltf-model="#aperitif-table" rotation="0 0 0" position="20 0.8 -150" animation-mixer
+      scale="2 2 2" shadow="cast: t
+          rue">
+    </a-entity>
+
+    <a-entity id="aperitif-table" gltf-model="#aperitif-table" rotation="0 0 0" position="25 0.8 -150" animation-mixer
+      scale="2 2 2" shadow="cast: t
+          rue">
+    </a-entity>
+    <a-entity id="aperitif-table" gltf-model="#aperitif-table" rotation="0 0 0" position="25 0.8 -145" animation-mixer
+      scale="2 2 2" shadow="cast: t
+          rue">
+    </a-entity>
+    <a-entity id="aperitif-table" gltf-model="#aperitif-table" rotation="0 0 0" position="30 0.8 -140" animation-mixer
+      scale="2 2 2" shadow="cast: t
+          rue">
+    </a-entity>
+    <a-entity id="aperitif-table" gltf-model="#aperitif-table" rotation="0 0 0" position="33 0.8 -140" animation-mixer
+      scale="2 2 2" shadow="cast: t
+          rue">
+    </a-entity>
+    <a-entity id="aperitif-table" gltf-model="#aperitif-table" rotation="0 0 0" position="33 0.8 -143" animation-mixer
+      scale="2 2 2" shadow="cast: t
+          rue">
+    </a-entity>
+    <!-- <a-entity id="aperitif-table" gltf-model="#aperitif-table" rotation="0 0 0" position="32 0.8 -110" animation-mixer scale="2 2 2"
+          shadow="cast: t
+          rue">
+        </a-entity> -->
+
+    <!-- TRASH CANS -->
+    <a-entity id="trashcan" gltf-model="#trashcan" position="-20 0 -140" animation-mixer scale="0.3 0.3 0.3"
+      shadow="cast: true;"></a-entity>
+    <a-entity id="trashcan" gltf-model="#trashcan" position="23 0 -143" animation-mixer scale="0.3 0.3 0.3"
+      shadow="cast: true;"></a-entity>
+
+
+
+    <!-- <a-entity id="darts" gltf-model="#darts" rotation="90 45 0" position="-40 3 -145" animation-mixer
+      scale="0.5 0.5 0.5" shadow="cast: true">
+    </a-entity> -->
+
+
+    <!-- <a-entity id="mcwc" gltf-model="#mcwc" rotation="0 0 0" position="-10 -11.7 -155 " scale=".3 .3 .3"
+    shadow="cast: true">
+  </a-entity> -->
+
+    <!-- End Man Cave-->
+
+
+    <!-- birds - Nawang 
+    <a-entity id="bird" gltf-model="#bird" position="-5 5 -50" animation-mixer rotation="-20 0 0" scale="0.2 0.2 0.2"
+      shadow="cast: true;">
+    </a-entity>
+    <a-entity id="bird" gltf-model="#bird" position="-5 2 -55" animation-mixer rotation="80 0 0" scale="0.2 0.2 0.2"
+      shadow="cast: true;">
+    </a-entity>
+    <a-entity id="bird" gltf-model="#bird" position="0 5 -50" animation-mixer rotation="20 0 0" scale="0.2 0.2 0.2"
+      shadow="cast: true;">
+    </a-entity>
+    <a-entity id="bird" gltf-model="#bird" position="5 5 -55" animation-mixer rotation="-20 0 0" scale="0.2 0.2 0.2"
+      shadow="cast: true;">
+    </a-entity>
+    <a-entity id="bird" gltf-model="#bird" position="5 3 -55" animation-mixer rotation="-20 50 0" scale="0.2 0.2 0.2"
+      shadow="cast: true;">
+    </a-entity>
+    <a-entity id="bird" gltf-model="#bird" position="5 2 -60" animation-mixer rotation="-20 -30 0" scale="0.2 0.2 0.2"
+      shadow="cast: true;">
+    </a-entity>-->
+
+    <!-- lamps -->
+    <!-- loaded from lampLoader.js -->
+    <!-- end lamps -->
+
+    <!-- christmasTree -->
+    <!--<a-entity id="christmasTree" gltf-model="#christmasTree" position="-4.73 0 -4.41" scale="0.7 0.7 0.7"
+      shadow="cast: true;">
+    </a-entity>-->
+    <a-entity id="christmasTree" gltf-model="#christmasTree" position="-12.15 0 -4.70" shadow="cast: true;">
+    </a-entity>
+    <a-entity id="christmasTree" gltf-model="#christmasTree" position="-18.05 0 -7.34" scale="0.7 0.7 0.7"
+      shadow="cast: true;">
+    </a-entity>
+    <!-- end christmasTree -->
+
+    <!-- displayTV -->
+    <a-entity id="displayTV" gltf-model="#displayTV" position="0 0 -1.5" rotation="0 -90 0" shadow="cast: true;">
+
+      <a-video width="16" height="9" rotation="0 90 0" position="-4.451 3.82 0" src="#mr_video" scale="0.20 0.22 0">
+      </a-video>
+    </a-entity>
+    <!-- end displayTV -->
+
+    <!-- speaker - Nawang -->
+
+    <a-entity position="5 3 -55"
+      sound="src: url(./background_radio_min.mp3); autoplay: true; rolloffFactor: 2; maxDistance: 1;">
+    </a-entity>
+
+    <!-- !-- front -- -->
+    <a-entity id="speaker" gltf-model="#speaker" position="4.67 0 -5.73" rotation="0" shadow="cast: true;">
+    </a-entity>
+
+    <!-- !-- left -- -->
+    <a-entity id="speaker" gltf-model="#speaker" position="-83í 0 -69" rotation="0 -90 0" shadow="cast: true;">
+      <!-- <a-entity sound="src: url(./background_radio_min.mp3); autoplay: true;  rolloffFactor: 5;"></a-entity> -->
+    </a-entity>
+
+    <!-- !-- bottom -- -->
+    <a-entity id="speaker" gltf-model="#speaker" position="0 0 -155" rotation="0" shadow="cast: true;">
+      <!-- <a-entity sound="src: url(./background_radio_min.mp3); autoplay: true;  rolloffFactor: 5;"></a-entity> -->
+    </a-entity>
+    <!-- !-- right -- -->
+    <a-entity id="speaker" gltf-model="#speaker" position="82.5 0 -69" rotation="0 -90 0" shadow="cast: true;">
+      <!-- <a-entity sound="src: url(./background_radio_min.mp3); autoplay: true;  rolloffFactor: 5;"></a-entity> -->
+    </a-entity>
+
+    <!-- end background radio GTA Style -->
+
+    <!-- Benches -->
+    <!-- Sector 0: Entrance -->
+    <a-entity id="bench-wood" gltf-model="#bench-wood" position="-10 0 13" scale="3.5 3.5 3.5" rotation="0 -10 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="bench-dark" gltf-model="#bench-dark" position="-30 0 -13.5" scale="3.5 3.5 3.5" rotation="0 -23 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <!-- Sector 1: Showroom -->
+    <a-entity id="bench-wood" gltf-model="#bench-wood" position="-68.8 0 -19.1" scale="3.5 3.5 3.5" rotation="0 -52.1 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="bench-wood" gltf-model="#bench-wood" position="-72.6 0 -24" scale="3.5 3.5 3.5" rotation="0 -55.5 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="bench-wood" gltf-model="#bench-wood" position="-58.8 0 -113" scale="6 3.5 3.5" rotation="0 -127 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <!-- Sector 3: Showroom -->
+    <a-entity id="bench-wood" gltf-model="#bench-wood" position="61.2 0 -58.3" scale="3.5 3.5 3.5" rotation="0 -100.7 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="bench-dark" gltf-model="#bench-dark" position="66.7 0 -74.3" scale="3.5 3.5 3.5" rotation="0 -94.5 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="bench-dark" gltf-model="#bench-dark" position="39 0 -18" scale="3.5 3.5 3.5" rotation="0 41 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="bench-dark" gltf-model="#bench-dark" position="51 0 -7" scale="3.5 3.5 3.5" rotation="0 41 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <!-- End Benches -->
+
+    <!-- Seats -->
+    <a-entity id="couch-big" gltf-model="#couch-big" position="7.5 0 -133.4" scale="3 3 3" rotation="0 240 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="couch-small" gltf-model="#couch-small" position="10.8 0 -158.8" scale="2.5 2.5 2.5" rotation="0 300 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="seat-marble" gltf-model="#seat-marble" position="35.6 0 -142.6" scale="3.5 3.5 3.5" rotation="0 279 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="seat-marble" gltf-model="#seat-marble" position="44 0 -135.7" scale="3.5 3.5 3.5" rotation="0 269.2 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="couch-big" gltf-model="#couch-big" position="-17.8 0 -167" scale="3 3 3" rotation="0 -310 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="couch-big" gltf-model="#couch-big" position="15.5 0 -166.5" scale="3 3 3" rotation="0 -328.3 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="couch-big" gltf-model="#couch-big" position="44.9 0 -113.7" scale="3 3 3" rotation="0 200 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="couch-big" gltf-model="#couch-big" position="28.7 0 -115.1" scale="3 3 3" rotation="0 155 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="couch-small" gltf-model="#couch-small" position="54.1 0 -135.3" scale="2.5 2.5 2.5"
+      rotation="0 254.7 0" shadow="cast: true; receive: true"></a-entity>
+    <!-- End Seats -->
+
+    <!-- Plants -->
+    <!-- Sector 0: Entrance -->
+    <a-entity id="plant-high" gltf-model="#plant-high" position="-16 0 15.5" scale="3.5 3.5 3.5" rotation="0 -10 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-high" gltf-model="#plant-high" position="46.6 0 -18" scale="3.5 3.5 3.5" rotation="0 0 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-low" gltf-model="#plant-low" position="-30 0 -8.5" scale="3.5 3.5 3.5" rotation="0 -23 0"
+      shadow="cast: true; receive: true"></a-entity>
+
+    <!-- Sector 1: Showroom -->
+    <a-entity id="plant-high" gltf-model="#plant-high" position="-62.3 0 -10.1" scale="3.5 3.5 3.5" rotation="0 0 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-low" gltf-model="#plant-low" position="-67.5 0 -16" scale="3.5 3.5 3.5" rotation="0 -52 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-high" gltf-model="#plant-high" position="-49.8 0 -128.3" scale="5 5 5" rotation="0 180 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-low" gltf-model="#plant-low" position="-52.5 0 -103" scale="5 5 5" rotation="0 55 0"
+      shadow="cast: true; receive: true"></a-entity>
+
+    <!-- Sector 2: Chillspot -->
+    <a-entity id="plant-high" gltf-model="#plant-high" position="50.7 0 -125.8" scale="3.5 3.5 3.5" rotation="0 0 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-leaves" gltf-model="#plant-leaves" position="49.8 0 -140.7" scale="3.5 3.5 3.5"
+      rotation="0 55 0" shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-high" gltf-model="#plant-high" position="4.5 0 -157" scale="3.5 3.5 3.5" rotation="0 -90 0"
+      shadow="cast: true; receive: true"></a-entity>
+
+    <!-- Sector 3: Showroom -->
+    <a-entity id="plant-high" gltf-model="#plant-high" position="60.8 0 -9.5" scale="3.5 3.5 3.5" rotation="0 0 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-low" gltf-model="#plant-low" position="58.5 0 -15.4" scale="3.5 3.5 3.5" rotation="0 -50 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-leaves" gltf-model="#plant-leaves" position="59.2 0 -18" scale="5 5 5" rotation="0 180 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-high" gltf-model="#plant-high" position="64.8 0 -57" scale="3.5 3.5 3.5" rotation="0 -10 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-low" gltf-model="#plant-low" position="82.3 0 -58.5" scale="3.5 3.5 3.5" rotation="0 -7.4 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <a-entity id="plant-leaves" gltf-model="#plant-leaves" position="81.8 0 -57.3" scale="5 5 5" rotation="0 -8.8 0"
+      shadow="cast: true; receive: true"></a-entity>
+    <!-- End Planten -->
+
+    <!-- tafels -->
+    <a-entity id="building" gltf-model="#building" position="0 0 10" animation-mixer material="alphaTest: 0.5"
+      shadow="receive: true; cast: true;"></a-entity>
+
+    <!-- <a-sky src="LA_Downtown_Afternoon_Fishing_B_8k.jpg" rotation="0 -130 0"></a-sky> -->
+    <a-entity id="controls" oculus-go-controls="hand: right"></a-entity>
+  </a-scene>
+  <script src="./js/tableLoader.js"></script>
+  <script src="./js/lampLoader.js"></script>
+
+  <script>
+    let entityEl = document.getElementById("controls");
+    var player = document.querySelector("a-camera");
+    var mesh = this.el.getObject3D("mesh");
+    var loader = new THREE.TextureLoader();
+    loader.load(url, texture => {
+      // onLoad callback
+      mesh.material.map = texture;
+      mesh.material.needsUpdate = true;
+      this.switch = !this.switch;
+    });
+    entityEl.addEventListener("triggerdown", function (event) {
+      var angle = player.getAttribute("rotation");
+      var x = 1 * Math.cos((angle.y * Math.PI) / 180);
+      var y = 1 * Math.sin((angle.y * Math.PI) / 180);
+      var pos = player.getAttribute("position");
+      pos.x -= y;
+      pos.z -= x;
+      player.setAttribute("position", pos);
+    });
+    window.addEventListener("keydown", e => {
+      if (e.code === "KeyR") {
+        var angle = player.getAttribute("rotation");
+        var x = 2 * Math.cos((angle.y * Math.PI) / 180);
+        var y = 2 * Math.sin((angle.y * Math.PI) / 180);
+        var pos = player.getAttribute("position");
+        pos.x -= y;
+        pos.z -= x;
+        player.setAttribute("position", pos);
+      }
+    });
+  </script>
+</body>
+
+</html>
